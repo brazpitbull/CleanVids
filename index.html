@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meu Link</title>
+  <title>CleanVids</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f5f5f3;
-      --surface: #ffffff;
-      --border: rgba(0,0,0,0.1);
-      --border-strong: rgba(0,0,0,0.18);
-      --text-primary: #1a1a1a;
-      --text-secondary: #555;
-      --text-muted: #999;
-      --accent: #00c49a;
-      --accent-dark: #009e7c;
+      --bg: #141414;
+      --surface: #1f1f1f;
+      --border: rgba(255,255,255,0.1);
+      --border-strong: rgba(255,255,255,0.2);
+      --text-primary: #f5f5f5;
+      --text-secondary: #b3b3b3;
+      --text-muted: #777;
+      --accent: #e50914;
+      --accent-dark: #b00610;
       --radius: 14px;
     }
 
@@ -38,14 +38,14 @@
     .profile { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 2rem; }
     .avatar {
       width: 90px; height: 90px; border-radius: 50%;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      background: linear-gradient(135deg, #1a1a1a 0%, #2b0405 100%);
       display: flex; align-items: center; justify-content: center;
-      font-size: 34px; font-weight: 600; color: #fff;
+      font-size: 30px; font-weight: 600; color: #fff;
       border: 3px solid var(--accent);
       letter-spacing: -1px;
     }
-    .profile h1 { font-size: 22px; font-weight: 600; text-align: center; }
-    .profile p { font-size: 14px; color: var(--text-secondary); text-align: center; max-width: 300px; line-height: 1.5; }
+    .profile h1 { font-size: 22px; font-weight: 600; text-align: center; letter-spacing: -0.02em; }
+    .profile p { font-size: 14px; color: var(--text-secondary); text-align: center; max-width: 320px; line-height: 1.5; }
 
     /* === SEÇÕES === */
     .section-label {
@@ -81,10 +81,8 @@
       width: 42px; height: 42px; border-radius: 11px;
       display: flex; align-items: center; justify-content: center;
       font-size: 20px; flex-shrink: 0;
+      background: rgba(229,9,20,0.15);
     }
-    .plan-icon.basic  { background: #e1f5ee; }
-    .plan-icon.pro    { background: #eeedfe; }
-    .plan-icon.premium{ background: #faeeda; }
     .plan-info h3 { font-size: 15px; font-weight: 500; }
     .plan-info p  { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
     .plan-price .amount { font-size: 22px; font-weight: 600; color: var(--text-primary); }
@@ -102,18 +100,14 @@
       font-size: 15px; font-weight: 400;
       transition: border-color 0.15s, background 0.15s, transform 0.1s;
     }
-    .link-btn:hover  { border-color: var(--border-strong); background: #fafafa; }
+    .link-btn:hover  { border-color: var(--border-strong); background: #262626; }
     .link-btn:active { transform: scale(0.99); }
     .link-icon {
       width: 38px; height: 38px; border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
       font-size: 18px; flex-shrink: 0;
+      background: rgba(229,9,20,0.15);
     }
-    .wa   .link-icon { background: #dcf8c6; }
-    .ig   .link-icon { background: #fce4ec; }
-    .mail .link-icon { background: #e3f2fd; }
-    .pix  .link-icon { background: #e0f7f2; }
-    .mp   .link-icon { background: #e3eeff; }
     .link-arrow { margin-left: auto; color: var(--text-muted); font-size: 14px; }
 
     /* === GERADOR === */
@@ -137,8 +131,9 @@
       transition: border-color 0.15s;
     }
     .gen-row input:focus { border-color: var(--accent); }
+    .gen-row input::placeholder { color: var(--text-muted); }
     .gen-btn {
-      background: #1a1a2e; color: #fff;
+      background: var(--accent); color: #fff;
       border: none; border-radius: 10px;
       padding: 9px 16px; font-size: 14px; font-family: inherit;
       cursor: pointer; white-space: nowrap;
@@ -148,13 +143,13 @@
 
     .result-link {
       display: none; margin-top: 10px;
-      font-size: 12px; color: #0f6e56;
-      background: #e1f5ee;
+      font-size: 12px; color: #ff8a8f;
+      background: rgba(229,9,20,0.12);
       border-radius: 8px; padding: 8px 12px;
       word-break: break-all; cursor: pointer;
       line-height: 1.5;
     }
-    .result-link:hover { background: #c9f0e2; }
+    .result-link:hover { background: rgba(229,9,20,0.2); }
 
     /* === DIVIDER === */
     hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
@@ -165,7 +160,7 @@
     /* === TOAST === */
     .toast {
       position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
-      background: #1a1a2e; color: #fff;
+      background: var(--accent); color: #fff;
       padding: 9px 20px; border-radius: 24px;
       font-size: 13px; opacity: 0;
       transition: opacity 0.2s;
@@ -187,26 +182,21 @@
 ============================================================ -->
 <script>
   var CONFIG = {
-    nome:        "Seu Nome",
-    bio:         "Sua descrição ou serviço — edite aqui",
-    avatarLetra: "S",
+    nome:        "CleanVids",
+    bio:         "Explore milhares de filmes, séries, documentários e lançamentos em alta qualidade, disponíveis para assistir quando quiser.",
+    avatarLetra: "C",
 
     // Pagamentos
-    pixChave:    "sua@chave.pix",             // chave Pix (e-mail, CPF, telefone ou aleatória)
-    mpLink:      "https://mpago.li/seu-link", // link do Mercado Pago (gere em mercadopago.com.br)
+    pixChave:    "33999670316",
 
     // Comunicação
-    whatsapp:    "5531999999999",             // com DDI (55) + DDD + número, sem espaços
-    instagram:   "seuinstagram",              // sem o @
-    email:       "seuemail@email.com",
+    whatsapp:    "5533999670316",
 
     // Planos
     planos: [
-      { id: "basico",  emoji: "⭐", classe: "basic",   nome: "Plano Básico",   desc: "Acesso essencial ao serviço", destaque: false },
-      { id: "pro",     emoji: "🚀", classe: "pro",     nome: "Plano Pro",      desc: "Recursos avançados inclusos", destaque: true  },
-      { id: "premium", emoji: "👑", classe: "premium", nome: "Plano Premium",  desc: "Experiência completa",        destaque: false }
+      { id: "mensal-simples", emoji: "🎬", nome: "Mensal Simples",        desc: "Acesso completo ao catálogo",          preco: "13", destaque: false },
+      { id: "mensal-onlyfans", emoji: "🔥", nome: "Mensal com Onlyfans",  desc: "Catálogo completo + conteúdo extra",    preco: "17", destaque: true  }
     ],
-    valor: "13",
 
     // Base de geração de links (seu site ou sistema de cobrança)
     baseLink: "https://seusite.com.br/pagar"
@@ -244,20 +234,23 @@
     }
   }
 
-  /* gerar link de plano */
-  function linkPlano(id) {
-    return c.baseLink + '?plano=' + id + '&valor=' + c.valor;
+  /* link do whatsapp com mensagem do plano escolhido */
+  function linkWhatsPlano(nome, preco) {
+    var msg = 'Olá! Quero assinar o plano *' + nome + '* (R$' + preco + '/mês).\n\n'
+            + 'Já fiz o Pix para a chave: ' + c.pixChave + '\n'
+            + 'Vou enviar o comprovante aqui!';
+    return 'https://wa.me/' + c.whatsapp + '?text=' + encodeURIComponent(msg);
   }
 
   /* === HTML dos planos === */
   var planosHTML = c.planos.map(function(p) {
-    return '<a class="plan-card' + (p.destaque ? ' featured' : '') + '" href="' + linkPlano(p.id) + '" target="_blank" onclick="event.preventDefault(); copyAndOpen(\'' + linkPlano(p.id) + '\', \'Link do ' + p.nome + ' copiado!\')">'
-      + (p.destaque ? '<span class="popular-tag">Mais popular</span>' : '')
+    return '<a class="plan-card' + (p.destaque ? ' featured' : '') + '" href="' + linkWhatsPlano(p.nome, p.preco) + '" target="_blank" onclick="prepararPagamento(event, \'' + p.nome + '\', \'' + p.preco + '\')">'
+      + (p.destaque ? '<span class="popular-tag">Mais completo</span>' : '')
       + '<div class="plan-left">'
-      +   '<div class="plan-icon ' + p.classe + '">' + p.emoji + '</div>'
+      +   '<div class="plan-icon">' + p.emoji + '</div>'
       +   '<div class="plan-info"><h3>' + p.nome + '</h3><p>' + p.desc + '</p></div>'
       + '</div>'
-      + '<div class="plan-price"><div class="amount">R$' + c.valor + '</div><div class="period">/mês</div></div>'
+      + '<div class="plan-price"><div class="amount">R$' + p.preco + '</div><div class="period">/mês</div></div>'
       + '</a>';
   }).join('');
 
@@ -269,67 +262,51 @@
     + '<p>' + c.bio + '</p>'
     + '</div>'
 
-    + '<div class="section-label">Planos mensais — R$' + c.valor + '/mês</div>'
+    + '<div class="section-label">Planos mensais</div>'
     + planosHTML
 
-    + '<div class="section-label">Formas de pagamento</div>'
-    + '<button class="link-btn pix" onclick="copyPix()">'
-    +   '<div class="link-icon">💠</div><span>Pagar via Pix</span>'
+    + '<div class="section-label">Como funciona?</div>'
+    + '<div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; margin-bottom:10px;">'
+    +   '<ol style="font-size:14px; color:var(--text-secondary); line-height:1.8; padding-left:1.1rem; margin:0;">'
+    +     '<li>Escolha a lista desejada e realize o pagamento.</li>'
+    +     '<li>Após a confirmação do pagamento, você receberá o aplicativo recomendado e o código de acesso.</li>'
+    +     '<li>Instale o aplicativo no seu dispositivo e insira o código recebido.</li>'
+    +     '<li>Pronto! Sua lista estará liberada para uso imediato.</li>'
+    +   '</ol>'
+    + '</div>'
+
+    + '<div class="section-label">Compatível com</div>'
+    + '<div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:10px;">'
+    +   '<div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:14px; display:flex; align-items:center; gap:8px;">📱 Android</div>'
+    +   '<div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:14px; display:flex; align-items:center; gap:8px;">🍎 iPhone (iOS)</div>'
+    +   '<div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:14px; display:flex; align-items:center; gap:8px;">📺 Smart TV LG</div>'
+    +   '<div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:14px; display:flex; align-items:center; gap:8px;">📺 Smart TV Samsung</div>'
+    +   '<div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:14px; display:flex; align-items:center; gap:8px;">📺 Roku</div>'
+    +   '<div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:14px; display:flex; align-items:center; gap:8px;">📺 TV Box Android</div>'
+    + '</div>'
+
+    + '<hr />'
+    + '<div class="section-label">Pagamento</div>'
+    + '<button class="link-btn" onclick="copyPix()">'
+    +   '<div class="link-icon">💠</div><span>Copiar chave Pix manualmente</span>'
     +   '<span class="link-arrow">📋</span>'
     + '</button>'
-    + '<a class="link-btn mp" href="' + c.mpLink + '" target="_blank">'
-    +   '<div class="link-icon">💳</div><span>Mercado Pago — cartão / boleto</span>'
-    +   '<span class="link-arrow">↗</span>'
-    + '</a>'
 
     + '<hr />'
     + '<div class="section-label">Fale comigo</div>'
-    + '<a class="link-btn wa" href="https://wa.me/' + c.whatsapp + '?text=Ol%C3%A1%2C%20vim%20pelo%20seu%20link%20e%20quero%20assinar%20um%20plano!" target="_blank">'
+    + '<a class="link-btn" href="https://wa.me/' + c.whatsapp + '?text=Ol%C3%A1%2C%20vim%20pelo%20seu%20link%20e%20quero%20assinar%20um%20plano!" target="_blank">'
     +   '<div class="link-icon">💬</div><span>WhatsApp</span><span class="link-arrow">↗</span>'
     + '</a>'
-    + '<a class="link-btn ig" href="https://instagram.com/' + c.instagram + '" target="_blank">'
-    +   '<div class="link-icon">📸</div><span>Instagram</span><span class="link-arrow">↗</span>'
-    + '</a>'
-    + '<a class="link-btn mail" href="mailto:' + c.email + '?subject=Quero%20assinar%20um%20plano">'
-    +   '<div class="link-icon">✉️</div><span>E-mail</span><span class="link-arrow">↗</span>'
-    + '</a>'
 
-    + '<hr />'
-    + '<div class="gen-box">'
-    +   '<h3>🔗 Gerar link de pagamento personalizado</h3>'
-    +   '<div class="gen-row">'
-    +     '<input id="clientInput" type="text" placeholder="Nome do cliente" />'
-    +     '<button class="gen-btn" onclick="gerarLink()">Gerar ↗</button>'
-    +   '</div>'
-    +   '<div id="resultLink" class="result-link" onclick="copiarGerado()" title="Clique para copiar">'
-    +     '🔗 <span id="resultUrl"></span>'
-    +   '</div>'
-    + '</div>'
-
-    + '<div class="footer">Compartilhe este link com seus clientes</div>';
+    + '<div class="footer">CleanVids · compartilhe este link com seus clientes</div>';
 
   /* === funções globais === */
-  window.copyAndOpen = function(url, label) {
-    copyText(url, label);
+  window.prepararPagamento = function(event, nome, preco) {
+    copyText(c.pixChave, 'Chave Pix copiada! Abrindo WhatsApp...');
   };
 
   window.copyPix = function() {
     copyText(c.pixChave, 'Chave Pix copiada! ✅');
-  };
-
-  window.gerarLink = function() {
-    var nome = document.getElementById('clientInput').value.trim();
-    if (!nome) { toast('Digite o nome do cliente primeiro'); return; }
-    var slug = encodeURIComponent(nome.toLowerCase().replace(/\s+/g, '-'));
-    var url = c.baseLink + '?cliente=' + slug + '&plano=mensal&valor=' + c.valor;
-    document.getElementById('resultUrl').textContent = url;
-    document.getElementById('resultLink').style.display = 'block';
-    copyText(url, 'Link gerado e copiado! 🔗');
-  };
-
-  window.copiarGerado = function() {
-    var url = document.getElementById('resultUrl').textContent;
-    copyText(url, 'Link copiado! ✅');
   };
 })();
 </script>

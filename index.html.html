@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Link</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f5f3;
+      --surface: #ffffff;
+      --border: rgba(0,0,0,0.1);
+      --border-strong: rgba(0,0,0,0.18);
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-muted: #999;
+      --accent: #00c49a;
+      --accent-dark: #009e7c;
+      --radius: 14px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem 4rem;
+      color: var(--text-primary);
+    }
+
+    .page { width: 100%; max-width: 480px; }
+
+    /* === PERFIL === */
+    .profile { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 2rem; }
+    .avatar {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px; font-weight: 600; color: #fff;
+      border: 3px solid var(--accent);
+      letter-spacing: -1px;
+    }
+    .profile h1 { font-size: 22px; font-weight: 600; text-align: center; }
+    .profile p { font-size: 14px; color: var(--text-secondary); text-align: center; max-width: 300px; line-height: 1.5; }
+
+    /* === SEÇÕES === */
+    .section-label {
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.09em;
+      margin: 1.75rem 0 0.75rem;
+    }
+
+    /* === PLANOS === */
+    .plan-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.15s, transform 0.1s;
+      position: relative;
+    }
+    .plan-card:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .plan-card:active { transform: scale(0.99); }
+    .plan-card.featured { border: 2px solid var(--accent); }
+    .popular-tag {
+      position: absolute; top: -10px; left: 1.25rem;
+      background: var(--accent); color: #fff;
+      font-size: 11px; font-weight: 600;
+      padding: 2px 10px; border-radius: 20px;
+    }
+    .plan-left { display: flex; align-items: center; gap: 12px; }
+    .plan-icon {
+      width: 42px; height: 42px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .plan-icon.basic  { background: #e1f5ee; }
+    .plan-icon.pro    { background: #eeedfe; }
+    .plan-icon.premium{ background: #faeeda; }
+    .plan-info h3 { font-size: 15px; font-weight: 500; }
+    .plan-info p  { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .plan-price .amount { font-size: 22px; font-weight: 600; color: var(--text-primary); }
+    .plan-price .period { font-size: 12px; color: var(--text-muted); text-align: right; }
+
+    /* === BOTÕES DE LINK === */
+    .link-btn {
+      display: flex; align-items: center; gap: 12px;
+      width: 100%; padding: 0.85rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      cursor: pointer; text-decoration: none; color: var(--text-primary);
+      font-size: 15px; font-weight: 400;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    }
+    .link-btn:hover  { border-color: var(--border-strong); background: #fafafa; }
+    .link-btn:active { transform: scale(0.99); }
+    .link-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .wa   .link-icon { background: #dcf8c6; }
+    .ig   .link-icon { background: #fce4ec; }
+    .mail .link-icon { background: #e3f2fd; }
+    .pix  .link-icon { background: #e0f7f2; }
+    .mp   .link-icon { background: #e3eeff; }
+    .link-arrow { margin-left: auto; color: var(--text-muted); font-size: 14px; }
+
+    /* === GERADOR === */
+    .gen-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+    }
+    .gen-box h3 { font-size: 14px; font-weight: 500; margin-bottom: 0.75rem; }
+    .gen-row { display: flex; gap: 8px; }
+    .gen-row input {
+      flex: 1; font-size: 14px; font-family: inherit;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .gen-row input:focus { border-color: var(--accent); }
+    .gen-btn {
+      background: #1a1a2e; color: #fff;
+      border: none; border-radius: 10px;
+      padding: 9px 16px; font-size: 14px; font-family: inherit;
+      cursor: pointer; white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .gen-btn:hover { opacity: 0.85; }
+
+    .result-link {
+      display: none; margin-top: 10px;
+      font-size: 12px; color: #0f6e56;
+      background: #e1f5ee;
+      border-radius: 8px; padding: 8px 12px;
+      word-break: break-all; cursor: pointer;
+      line-height: 1.5;
+    }
+    .result-link:hover { background: #c9f0e2; }
+
+    /* === DIVIDER === */
+    hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+    /* === FOOTER === */
+    .footer { text-align: center; margin-top: 2.5rem; font-size: 12px; color: var(--text-muted); }
+
+    /* === TOAST === */
+    .toast {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      background: #1a1a2e; color: #fff;
+      padding: 9px 20px; border-radius: 24px;
+      font-size: 13px; opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none; z-index: 999;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+
+    @media (max-width: 420px) {
+      body { padding: 1.25rem 0.75rem 3rem; }
+      .plan-price .amount { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+  ✏️  CONFIGURE AQUI SUAS INFORMAÇÕES
+============================================================ -->
+<script>
+  var CONFIG = {
+    nome:        "Seu Nome",
+    bio:         "Sua descrição ou serviço — edite aqui",
+    avatarLetra: "S",
+
+    // Pagamentos
+    pixChave:    "sua@chave.pix",             // chave Pix (e-mail, CPF, telefone ou aleatória)
+    mpLink:      "https://mpago.li/seu-link", // link do Mercado Pago (gere em mercadopago.com.br)
+
+    // Comunicação
+    whatsapp:    "5531999999999",             // com DDI (55) + DDD + número, sem espaços
+    instagram:   "seuinstagram",              // sem o @
+    email:       "seuemail@email.com",
+
+    // Planos
+    planos: [
+      { id: "basico",  emoji: "⭐", classe: "basic",   nome: "Plano Básico",   desc: "Acesso essencial ao serviço", destaque: false },
+      { id: "pro",     emoji: "🚀", classe: "pro",     nome: "Plano Pro",      desc: "Recursos avançados inclusos", destaque: true  },
+      { id: "premium", emoji: "👑", classe: "premium", nome: "Plano Premium",  desc: "Experiência completa",        destaque: false }
+    ],
+    valor: "13",
+
+    // Base de geração de links (seu site ou sistema de cobrança)
+    baseLink: "https://seusite.com.br/pagar"
+  };
+</script>
+<!-- ============================================================ -->
+
+<div class="page" id="app"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+  var c = CONFIG;
+
+  /* toast */
+  function toast(msg) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(el._t);
+    el._t = setTimeout(function() { el.classList.remove('show'); }, 2300);
+  }
+
+  function copyText(text, label) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function() { toast(label || 'Copiado!'); });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      toast(label || 'Copiado!');
+    }
+  }
+
+  /* gerar link de plano */
+  function linkPlano(id) {
+    return c.baseLink + '?plano=' + id + '&valor=' + c.valor;
+  }
+
+  /* === HTML dos planos === */
+  var planosHTML = c.planos.map(function(p) {
+    return '<a class="plan-card' + (p.destaque ? ' featured' : '') + '" href="' + linkPlano(p.id) + '" target="_blank" onclick="event.preventDefault(); copyAndOpen(\'' + linkPlano(p.id) + '\', \'Link do ' + p.nome + ' copiado!\')">'
+      + (p.destaque ? '<span class="popular-tag">Mais popular</span>' : '')
+      + '<div class="plan-left">'
+      +   '<div class="plan-icon ' + p.classe + '">' + p.emoji + '</div>'
+      +   '<div class="plan-info"><h3>' + p.nome + '</h3><p>' + p.desc + '</p></div>'
+      + '</div>'
+      + '<div class="plan-price"><div class="amount">R$' + c.valor + '</div><div class="period">/mês</div></div>'
+      + '</a>';
+  }).join('');
+
+  /* === montar página === */
+  document.getElementById('app').innerHTML =
+    '<div class="profile">'
+    + '<div class="avatar">' + c.avatarLetra + '</div>'
+    + '<h1>' + c.nome + '</h1>'
+    + '<p>' + c.bio + '</p>'
+    + '</div>'
+
+    + '<div class="section-label">Planos mensais — R$' + c.valor + '/mês</div>'
+    + planosHTML
+
+    + '<div class="section-label">Formas de pagamento</div>'
+    + '<button class="link-btn pix" onclick="copyPix()">'
+    +   '<div class="link-icon">💠</div><span>Pagar via Pix</span>'
+    +   '<span class="link-arrow">📋</span>'
+    + '</button>'
+    + '<a class="link-btn mp" href="' + c.mpLink + '" target="_blank">'
+    +   '<div class="link-icon">💳</div><span>Mercado Pago — cartão / boleto</span>'
+    +   '<span class="link-arrow">↗</span>'
+    + '</a>'
+
+    + '<hr />'
+    + '<div class="section-label">Fale comigo</div>'
+    + '<a class="link-btn wa" href="https://wa.me/' + c.whatsapp + '?text=Ol%C3%A1%2C%20vim%20pelo%20seu%20link%20e%20quero%20assinar%20um%20plano!" target="_blank">'
+    +   '<div class="link-icon">💬</div><span>WhatsApp</span><span class="link-arrow">↗</span>'
+    + '</a>'
+    + '<a class="link-btn ig" href="https://instagram.com/' + c.instagram + '" target="_blank">'
+    +   '<div class="link-icon">📸</div><span>Instagram</span><span class="link-arrow">↗</span>'
+    + '</a>'
+    + '<a class="link-btn mail" href="mailto:' + c.email + '?subject=Quero%20assinar%20um%20plano">'
+    +   '<div class="link-icon">✉️</div><span>E-mail</span><span class="link-arrow">↗</span>'
+    + '</a>'
+
+    + '<hr />'
+    + '<div class="gen-box">'
+    +   '<h3>🔗 Gerar link de pagamento personalizado</h3>'
+    +   '<div class="gen-row">'
+    +     '<input id="clientInput" type="text" placeholder="Nome do cliente" />'
+    +     '<button class="gen-btn" onclick="gerarLink()">Gerar ↗</button>'
+    +   '</div>'
+    +   '<div id="resultLink" class="result-link" onclick="copiarGerado()" title="Clique para copiar">'
+    +     '🔗 <span id="resultUrl"></span>'
+    +   '</div>'
+    + '</div>'
+
+    + '<div class="footer">Compartilhe este link com seus clientes</div>';
+
+  /* === funções globais === */
+  window.copyAndOpen = function(url, label) {
+    copyText(url, label);
+  };
+
+  window.copyPix = function() {
+    copyText(c.pixChave, 'Chave Pix copiada! ✅');
+  };
+
+  window.gerarLink = function() {
+    var nome = document.getElementById('clientInput').value.trim();
+    if (!nome) { toast('Digite o nome do cliente primeiro'); return; }
+    var slug = encodeURIComponent(nome.toLowerCase().replace(/\s+/g, '-'));
+    var url = c.baseLink + '?cliente=' + slug + '&plano=mensal&valor=' + c.valor;
+    document.getElementById('resultUrl').textContent = url;
+    document.getElementById('resultLink').style.display = 'block';
+    copyText(url, 'Link gerado e copiado! 🔗');
+  };
+
+  window.copiarGerado = function() {
+    var url = document.getElementById('resultUrl').textContent;
+    copyText(url, 'Link copiado! ✅');
+  };
+})();
+</script>
+
+</body>
+</html>

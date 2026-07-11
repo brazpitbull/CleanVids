@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CleanVids · Assista agora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #060a12;
+            color: #e8edf5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            overflow-x: hidden;
+        }
+
+        /* ===== FUNDO COM GIF ===== */
+        .bg-cinema {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-cinema img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            filter: brightness(0.3) saturate(1.2) contrast(1.1);
+        }
+
+        .bg-cinema::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(6, 10, 18, 0.5) 0%, rgba(6, 10, 18, 0.8) 100%);
+            pointer-events: none;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1120px;
+            width: 100%;
+            background: rgba(15, 23, 36, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 3.5rem;
+            padding: 3rem 2.8rem;
+            box-shadow: 0 40px 100px -20px #000000, inset 0 1px 1px rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== TOPO ===== */
+        .top {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .logo h1 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, #a78bfa 50%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo .sub {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: #8b7aaa;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            -webkit-text-fill-color: #8b7aaa;
+            margin-top: -2px;
+        }
+
+        .promo-tag {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.7rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 30px rgba(124, 58, 237, 0.35);
+            animation: shimmer 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { box-shadow: 0 4px 30px rgba(124, 58, 237, 0.35); }
+            50% { box-shadow: 0 4px 60px rgba(124, 58, 237, 0.7); }
+        }
+
+        .promo-tag::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(25deg); }
+            100% { transform: translateX(100%) rotate(25deg); }
+        }
+
+        /* ===== URGÊNCIA ===== */
+        .urgency-bar {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(167, 139, 250, 0.08));
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 60px;
+            padding: 0.6rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+            animation: pulseBorder 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseBorder {
+            0%, 100% { border-color: rgba(124, 58, 237, 0.2); }
+            50% { border-color: rgba(124, 58, 237, 0.5); }
+        }
+
+        .urgency-bar .text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #a78bfa;
+        }
+
+        .urgency-bar .text strong {
+            color: #ffffff;
+        }
+
+        .urgency-bar .countdown {
+            background: #0b0e14;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #f472b6;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            margin: 1.8rem 0 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #a78bfa 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h2 .highlight {
+            background: linear-gradient(135deg, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .sub-text {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.8rem;
+            margin-top: 0.8rem;
+            color: #b4a6d9;
+            font-size: 1.05rem;
+        }
+
+        .hero .sub-text .chip {
+            background: rgba(124, 58, 237, 0.06);
+            padding: 0.3rem 1.4rem;
+            border-radius: 30px;
+            border: 1px solid rgba(124, 58, 237, 0.1);
+            font-size: 0.85rem;
+            color: #c4b5e6;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .hero .sub-text .chip:hover {
+            background: rgba(124, 58, 237, 0.12);
+            transform: scale(1.02);
+        }
+
+        /* ===== CONTADORES ===== */
+        .counter-section {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .counter-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .counter-item .number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .counter-item .label {
+            font-size: 0.8rem;
+            color: #a696c9;
+        }
+
+        /* ===== PROVA SOCIAL ===== */
+        .social-proof {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.2rem 0 1.8rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-proof .avatars {
+            display: flex;
+        }
+
+        .social-proof .avatars span {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #0f1724;
+            margin-right: -8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2a3d5e, #7c3aed);
+            color: #fff;
+        }
+
+        .social-proof .text {
+            font-size: 0.85rem;
+            color: #b4a6d9;
+        }
+
+        .social-proof .text strong {
+            color: #fff;
+        }
+
+        .social-proof .stars {
+            color: #fbbf24;
+            margin-left: auto;
+            font-size: 0.9rem;
+        }
+
+        /* ===== PLANOS ===== */
+        .plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .plan {
+            background: rgba(14, 22, 36, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 2rem 1.8rem 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .plan:hover {
+            transform: translateY(-12px) scale(1.01);
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 30px 60px -20px #000000cc;
+        }
+
+        .plan.destaque {
+            border-color: #a78bfa;
+            background: linear-gradient(145deg, rgba(20, 31, 49, 0.9), rgba(14, 22, 36, 0.9));
+            box-shadow: 0 0 0 1px #a78bfa40, 0 30px 60px -20px #000000cc;
+        }
+
+        .plan.destaque .plan-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 60%);
+            animation: rotateGlow 20s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .plan .badge {
+            font-size: 0.55rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            color: #fff;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            display: inline-block;
+            align-self: flex-start;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .plan .name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .plan .desc {
+            color: #b4a6d9;
+            font-size: 0.9rem;
+            margin: 0.2rem 0 1.2rem;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .plan .price-box {
+            margin: 0.2rem 0 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .plan .price-box .old {
+            font-size: 1rem;
+            color: #7a6a9e;
+            text-decoration: line-through;
+            margin-right: 0.5rem;
+        }
+
+        .plan .price-box .new {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .plan .price-box .period {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: #a696c9;
+            margin-left: 0.2rem;
+        }
+
+        /* ===== BOTÕES ===== */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 60px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            text-decoration: none;
+            margin-top: auto;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: #fff;
+            box-shadow: 0 6px 25px #4c1d95;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 35px #6d28d9;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+
+        .btn .btn-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        /* ===== COMO FUNCIONA ===== */
+        .how {
+            background: rgba(11, 18, 31, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 1.8rem;
+            padding: 1.8rem 2rem;
+            margin: 2.2rem 0 2.5rem;
+            border: 1px solid rgba(124, 58, 237, 0.06);
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+        .how:hover {
+            border-color: rgba(124, 58, 237, 0.15);
+        }
+
+        .how h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #a78bfa;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .how ol {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .how li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #b4a6d9;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            padding: 0.3rem 0.5rem;
+            border-radius: 12px;
+        }
+
+        .how li:hover {
+            background: rgba(124, 58, 237, 0.05);
+            transform: translateX(4px);
+        }
+
+        .how li .step {
+            background: linear-gradient(135deg, #2a1a45, #4c1d95);
+            color: #a78bfa;
+            font-weight: 800;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .how li:hover .step {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #4c1d95, #7c3aed);
+            color: #fff;
+        }
+
+        /* ===== COMPATÍVEL ===== */
+        .compatible {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.6rem 1.5rem;
+            padding: 1rem 0 0.2rem;
+            border-top: 1px solid rgba(124, 58, 237, 0.06);
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .compatible span {
+            font-weight: 400;
+            color: #a696c9;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .compatible .devices {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.8rem;
+        }
+
+        .compatible .devices i {
+            font-style: normal;
+            background: rgba(124, 58, 237, 0.04);
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            border: 1px solid rgba(124, 58, 237, 0.06);
+            font-size: 0.8rem;
+            color: #b4a6d9;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .compatible .devices i:hover {
+            background: rgba(124, 58, 237, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* ===== GARANTIA ===== */
+        .guarantee {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: #7a6a9e;
+            font-size: 0.75rem;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-cta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 1.2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #1a8b4a, #0f6b37);
+            padding: 0.9rem 2.5rem;
+            border-radius: 60px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 30px #0f5a30;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 45px #0f5a30;
+        }
+
+        .whatsapp-btn:active {
+            transform: scale(0.96);
+        }
+
+        .whatsapp-btn .icon {
+            font-size: 1.3rem;
+        }
+
+        .whatsapp-btn .whatsapp-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.08) 50%, transparent 60%);
+            animation: shine 4s ease-in-out infinite;
+        }
+
+        .footer-cta small {
+            color: #7a6a9e;
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== RESPONSIVO ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.2rem;
+                border-radius: 2rem;
+            }
+            .logo h1 { font-size: 1.8rem; }
+            .hero h2 { font-size: 1.6rem; }
+            .plan .price-box .new { font-size: 2.2rem; }
+            .how ol { grid-template-columns: 1fr; }
+            .counter-section { gap: 1rem; }
+            .counter-item { padding: 0.4rem 1rem; }
+            .counter-item .number { font-size: 1.2rem; }
+            .social-proof { flex-wrap: wrap; }
+            .social-proof .stars { margin-left: 0; }
+            .urgency-bar { flex-wrap: wrap; padding: 0.5rem 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .top { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+            .plans { grid-template-columns: 1fr; }
+            .footer-cta { flex-direction: column; align-items: stretch; }
+            .whatsapp-btn { justify-content: center; padding: 0.9rem 1.5rem; }
+            .compatible .devices i { font-size: 0.7rem; padding: 0.1rem 0.7rem; }
+            .hero h2 { font-size: 1.3rem; }
+            .promo-tag { font-size: 0.6rem; padding: 0.3rem 1rem; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== FUNDO COM GIF ===== -->
+    <div class="bg-cinema">
+        <!-- 🎬 GIF DA SALA DE CINEMA -->
+        <img 
+            src="https://media.giphy.com/media/3o6Ztq6aPqXw8X6UqU/giphy.gif" 
+            alt="Sala de cinema"
+            onerror="this.style.display='none'"
+        />
+    </div>
+
+    <!-- ===== CONTAINER ===== -->
+    <div class="container">
+
+        <!-- TOPO -->
+        <div class="top">
+            <div class="logo">
+                <span class="logo-icon">🎬</span>
+                <div>
+                    <h1>CleanVids</h1>
+                    <div class="sub">Stream · Sem enrolação</div>
+                </div>
+            </div>
+            <div class="promo-tag">⏳ <strong>Promoção</strong> · tempo limitado</div>
+        </div>
+
+        <!-- URGÊNCIA -->
+        <div class="urgency-bar">
+            <span style="font-size:1.2rem;">🎥</span>
+            <span class="text">
+                <strong>Últimas vagas!</strong> Mais de <strong>237 pessoas</strong> estão vendo esta oferta agora
+            </span>
+            <span class="countdown">⏱️ 12:47</span>
+        </div>
+
+        <!-- HERO -->
+        <div class="hero">
+            <h2>
+                Milhares de filmes, séries e <br />
+                <span class="highlight">lançamentos exclusivos</span> em alta qualidade
+            </h2>
+            <div class="sub-text">
+                <span>📺 Assista quando quiser</span>
+                <span class="chip">🎬 Catálogo completo</span>
+                <span class="chip">📡 4K + HDR</span>
+                <span class="chip">🚀 Sem travamentos</span>
+            </div>
+        </div>
+
+        <!-- CONTADORES -->
+        <div class="counter-section">
+            <div class="counter-item">
+                <span class="number">15K+</span>
+                <span class="label">Títulos</span>
+            </div>
+            <div class="counter-item">
+                <span class="number">98%</span>
+                <span class="label">Satisfação</span>
+            </div>
+            <div class="counter-item">
+                <span class="number">4.9</span>
+                <span class="label">⭐ Avaliação</span>
+            </div>
+        </div>
+
+        <!-- PROVA SOCIAL -->
+        <div class="social-proof">
+            <div class="avatars">
+                <span>👤</span>
+                <span>👤</span>
+                <span>👤</span>
+                <span>👤</span>
+                <span>👤</span>
+            </div>
+            <div class="text">
+                <strong>+2.300 pessoas</strong> já assinaram este mês
+            </div>
+            <div class="stars">⭐⭐⭐⭐⭐ 4.9</div>
+        </div>
+
+        <!-- PLANOS -->
+        <div class="plans">
+
+            <div class="plan">
+                <div class="name">Mensal Simples</div>
+                <div class="desc">Acesso completo ao catálogo</div>
+                <div class="price-box">
+                    <span class="old">R$30</span>
+                    <span class="new">R$13</span>
+                    <span class="period">/mês</span>
+                </div>
+                <button class="btn btn-primary">
+                    <span class="btn-shine"></span>
+                    🎬 Quero esse
+                </button>
+            </div>
+
+            <div class="plan destaque">
+                <div class="plan-glow"></div>
+                <div class="badge">⭐ Mais completo</div>
+                <div class="name">Mensal + Onlyfans</div>
+                <div class="desc">Catálogo completo + conteúdo extra</div>
+                <div class="price-box">
+                    <span class="old">R$45</span>
+                    <span class="new">R$17</span>
+                    <span class="period">/mês</span>
+                </div>
+                <button class="btn btn-primary">
+                    <span class="btn-shine"></span>
+                    ⭐ Quero esse
+                </button>
+            </div>
+
+        </div>
+
+        <!-- COMO FUNCIONA -->
+        <div class="how">
+            <h3>🎞️ Como funciona?</h3>
+            <ol>
+                <li><span class="step">1</span> Escolha o plano e faça o pagamento</li>
+                <li><span class="step">2</span> Receba o app e o código de acesso</li>
+                <li><span class="step">3</span> Instale, insira o código e pronto!</li>
+            </ol>
+        </div>
+
+        <!-- COMPATÍVEL -->
+        <div class="compatible">
+            <span>📱 Compatível com</span>
+            <div class="devices">
+                <i>Android</i>
+                <i>iPhone (iOS)</i>
+                <i>Smart TV LG</i>
+                <i>Smart TV Samsung</i>
+                <i>Roku</i>
+                <i>TV Box Android</i>
+            </div>
+        </div>
+
+        <!-- GARANTIA -->
+        <div class="guarantee">
+            <span style="font-size:1rem;">🛡️</span>
+            Garantia de 7 dias · Se não gostar, devolvemos 100% do seu dinheiro
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer-cta">
+            <a href="#" class="whatsapp-btn">
+                <span class="whatsapp-shine"></span>
+                <span class="icon">💬</span>
+                Fale comigo no WhatsApp
+            </a>
+            <small>🔒 Pagamento seguro · Suporte 24h</small>
+        </div>
+
+    </div>
+
+    <script>
+        // ===== CONTADOR =====
+        (function countdown() {
+            let time = 12 * 60 + 47;
+            const display = document.querySelector('.countdown');
+            setInterval(() => {
+                if (time <= 0) time = 12 * 60 + 47;
+                time--;
+                const mins = String(Math.floor(time / 60)).padStart(2, '0');
+                const secs = String(time % 60).padStart(2, '0');
+                display.textContent = `⏱️ ${mins}:${secs}`;
+            }, 1000);
+        })();
+    </script>
+
+</body>
+</html>

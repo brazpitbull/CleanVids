@@ -355,6 +355,7 @@
   const WHATSAPP_NUMBER = "5533999670316"; // com DDI 55
   const ANDROID_APK_URL = "https://github.com/brazpitbull/CleanVids/releases/download/hhi/IPTV.Smarters.Pro.3.1.5.1.apk";
   const INFINITEPAY_HANDLE = "emerson-braz"; // sua InfiniteTag, sem o $
+  const PAYMENT_PROXY_URL = "https://iptv.r2nhzsr9d2.workers.dev/"; // Cloudflare Worker (proxy pra InfinitePay)
 
   const PLAN_LABELS = { completo: "Completo", plus: "Plus" };
   const PLATFORM_LABELS = { tv: "TV Smart (Samsung/LG)", ios: "iPhone/iPad (iOS)", android: "Celular Android" };
@@ -559,7 +560,7 @@
     };
 
     try {
-      const resp = await fetch('https://api.checkout.infinitepay.io/links', {
+      const resp = await fetch(PAYMENT_PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
